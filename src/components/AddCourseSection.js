@@ -17,6 +17,7 @@ export const AddCourse = () => {
     };
     if (newCourse !== "") {
       setCourseList([...courseList, course]);
+      localStorage.setItem("courseList",JSON.stringify([...courseList,course]));
     }
   };
   const deleteCourse = (courseId) => {
