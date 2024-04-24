@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CourseSection } from "./CourseSection";
 import { CourseInput } from "./CourseInput";
+import { AddCourseButton } from "./AddCourseButton";
 export const AddCourse = () => {
   const [courseList, setCourseList] = useState([]);
   const [newCourse, setNewCourse] = useState("");
@@ -32,12 +33,7 @@ export const AddCourse = () => {
     <div className="flex flex-col justify-center gap-2 w-full">
       <div className="flex justify-center gap-2">
         <CourseInput handleChange={handleChange} />
-        <button
-          className="border border-emerald-700 p-1 rounded-md"
-          onClick={addNewCourse}
-        >
-          Add Course
-        </button>
+        <AddCourseButton addNewCourse={addNewCourse} />
       </div>
       <CourseSection
         courseList={courseList}
