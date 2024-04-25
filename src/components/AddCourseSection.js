@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CourseSection } from "./CourseSection";
 import { CourseInput } from "./CourseInput";
 import { AddCourseButton } from "./AddCourseButton";
@@ -17,7 +17,7 @@ export const AddCourse = () => {
     };
     if (newCourse !== "") {
       setCourseList([...courseList, course]);
-      localStorage.setItem("courseList",JSON.stringify([...courseList,course]));
+      localStorage.setItem("courseList", JSON.stringify([...courseList,course]));
     }
   };
   const deleteCourse = (courseId) => {
