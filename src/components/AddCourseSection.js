@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { CourseSection } from "./CourseSection";
 import { CourseInput } from "./CourseInput";
 import { AddCourseButton } from "./AddCourseButton";
 export const AddCourse = () => {
   const [courseList, setCourseList] = useState([]);
   const [newCourse, setNewCourse] = useState("");
+  useEffect(() => {
+    const savedCourses = JSON.parse(localStorage.getItem("courseList"));
+    setCourseList(savedCourses);
+  }, [])
   const handleChange = (event) => {
     setNewCourse(event.target.value);
   };
