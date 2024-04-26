@@ -6,8 +6,7 @@ export const AddCourse = () => {
   const [courseList, setCourseList] = useState([]);
   const [newCourse, setNewCourse] = useState("");
   useEffect(() => {
-    const savedCourses = JSON.parse(localStorage.getItem("courseList"));
-    setCourseList(savedCourses);
+    const savedCourses = localStorage.getItem("courseList") === null ? setCourseList([]) : setCourseList(JSON.parse(localStorage.getItem("courseList")));
   }, [])
   const handleChange = (event) => {
     setNewCourse(event.target.value);
@@ -29,9 +28,12 @@ export const AddCourse = () => {
   };
   const completeCourse = (courseId) => {
     const newCourseList = courseList.map((course) => {
-      if (course.id === courseId) return { ...course, isCompleted: !course.isCompleted };
-      else return course;
+      if (course.id === courseId) { 
+        return { ...course, isCompleted: !course.isCompleted }
+      } else return course;
     });
+    console.log(newCourseList);
+    localStorage.setItem("courseList", JSON.stringify(newCourseList))
     setCourseList(newCourseList);
   };
   return (
