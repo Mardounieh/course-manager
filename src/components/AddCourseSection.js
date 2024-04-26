@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { CourseSection } from "./CourseSection";
 import { CourseInput } from "./CourseInput";
 import { AddCourseButton } from "./AddCourseButton";
@@ -6,8 +6,11 @@ export const AddCourse = () => {
   const [courseList, setCourseList] = useState([]);
   const [newCourse, setNewCourse] = useState("");
   useEffect(() => {
-    const savedCourses = localStorage.getItem("courseList") === null ? setCourseList([]) : setCourseList(JSON.parse(localStorage.getItem("courseList")));
-  }, [])
+    const savedCourses =
+      localStorage.getItem("courseList") === null
+        ? setCourseList([])
+        : setCourseList(JSON.parse(localStorage.getItem("courseList")));
+  }, []);
   const handleChange = (event) => {
     setNewCourse(event.target.value);
   };
@@ -20,20 +23,27 @@ export const AddCourse = () => {
     };
     if (newCourse !== "") {
       setCourseList([...courseList, course]);
-      localStorage.setItem("courseList", JSON.stringify([...courseList,course]));
+      localStorage.setItem(
+        "courseList",
+        JSON.stringify([...courseList, course])
+      );
     }
   };
   const deleteCourse = (courseId) => {
     setCourseList(courseList.filter((course) => courseId !== course.id));
+    const newSavedCourses = JSON.parse(localStorage.getItem("courseList"));
+    newSavedCourses.map((savedCourse, index) => {
+      if(savedCourse.id === courseId) newSavedCourses.splice(index, 1)
+      localStorage.setItem("courseList", JSON.stringify(newSavedCourses));
+    })
   };
   const completeCourse = (courseId) => {
     const newCourseList = courseList.map((course) => {
-      if (course.id === courseId) { 
-        return { ...course, isCompleted: !course.isCompleted }
+      if (course.id === courseId) {
+        return { ...course, isCompleted: !course.isCompleted };
       } else return course;
     });
-    console.log(newCourseList);
-    localStorage.setItem("courseList", JSON.stringify(newCourseList))
+    localStorage.setItem("courseList", JSON.stringify(newCourseList));
     setCourseList(newCourseList);
   };
   return (
