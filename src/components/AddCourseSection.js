@@ -5,8 +5,8 @@ import { AddCourseButton } from "./AddCourseButton";
 export const AddCourse = () => {
   const [courseList, setCourseList] = useState([]);
   const [newCourse, setNewCourse] = useState("");
+  const [editable, setEditable] = useState(false)
   useEffect(() => {
-    const savedCourses =
       localStorage.getItem("courseList") === null
         ? setCourseList([])
         : setCourseList(JSON.parse(localStorage.getItem("courseList")));
@@ -33,9 +33,9 @@ export const AddCourse = () => {
     setCourseList(courseList.filter((course) => courseId !== course.id));
     const newSavedCourses = JSON.parse(localStorage.getItem("courseList"));
     newSavedCourses.map((savedCourse, index) => {
-      if(savedCourse.id === courseId) newSavedCourses.splice(index, 1)
+      if (savedCourse.id === courseId) newSavedCourses.splice(index, 1);
       localStorage.setItem("courseList", JSON.stringify(newSavedCourses));
-    })
+    });
   };
   const completeCourse = (courseId) => {
     const newCourseList = courseList.map((course) => {
@@ -46,6 +46,9 @@ export const AddCourse = () => {
     localStorage.setItem("courseList", JSON.stringify(newCourseList));
     setCourseList(newCourseList);
   };
+  const editCourse = () => {
+    return setEditable(!editable);
+  }
   return (
     <div className="flex flex-col justify-center gap-2 w-full">
       <div className="flex justify-center gap-2">
@@ -56,6 +59,8 @@ export const AddCourse = () => {
         courseList={courseList}
         deleteCourse={deleteCourse}
         completeCourse={completeCourse}
+        editCourse={editCourse}
+        editable={editable}
       />
     </div>
   );

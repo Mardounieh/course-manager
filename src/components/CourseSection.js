@@ -1,6 +1,7 @@
 import { CompleteCourseButton } from "./CompleteCourseButton";
 import { CourseName } from "./CourseNameTag";
 import { DeleteCourseButton } from "./DeleteCourseButton";
+import { EditCourse } from "./EditCourseButton";
 
 export const CourseSection = (props) => {
   return (
@@ -9,11 +10,20 @@ export const CourseSection = (props) => {
         return (
           <div
             key={`courseContainer_${index}`}
-            className="flex gap-2 justify-between items-center w-1/4"
+            className={`${
+              props.editable ? "border-green-500" : "border-black"
+            } border p-1 rounded flex gap-2 justify-between items-center w-1/4 duration-200`}
           >
-            <CourseName course={course}/>
-            <DeleteCourseButton course={course} deleteCourse={props.deleteCourse} />
-            <CompleteCourseButton course={course} completeCourse={props.completeCourse} />
+            <CourseName course={course} editCourse={props.editable} />
+            <EditCourse editCourse={props.editCourse} />
+            <CompleteCourseButton
+              course={course}
+              completeCourse={props.completeCourse}
+            />
+            <DeleteCourseButton
+              course={course}
+              deleteCourse={props.deleteCourse}
+            />
           </div>
         );
       })}
