@@ -5,14 +5,14 @@ import { EditCourse } from "./EditCourseButton";
 
 export const CourseSection = (props) => {
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-2 w-full sm:w-1/2 md:w-1/3 xl:w-full">
       {props.courseList.map((course, index) => {
         return (
           <div
             key={`courseContainer_${index}`}
             className={`${
               props.editable ? "border-green-500" : "border-black"
-            } border p-1 rounded flex gap-2 justify-between items-center w-1/4 duration-200`}
+            } border p-1 rounded flex gap-2 justify-between items-center w-full xl:w-1/4 duration-200`}
           >
             <CourseName course={course} editCourse={props.editable} />
             <EditCourse editCourse={props.editCourse} />

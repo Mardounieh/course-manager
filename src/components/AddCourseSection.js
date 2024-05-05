@@ -50,8 +50,8 @@ export const AddCourse = () => {
     return setEditable(!editable);
   }
   return (
-    <div className="flex flex-col justify-center gap-2 w-full">
-      <div className="flex justify-center gap-2">
+    <div className="flex flex-col items-center gap-2 w-full">
+      <div className="flex justify-center gap-2 w-full md:w-2/3 duration-500">
         <CourseInput handleChange={handleChange} />
         <AddCourseButton addNewCourse={addNewCourse} />
       </div>
